@@ -4,7 +4,7 @@ This [paper](https://arxiv.org/abs/1907.12461) introduced the opportunity to use
 So, I trained an EncoderDecoder model based on parsBERT on [WikiSummary](http://github.com/m3hrdadfi/wiki-summary) (A summarization dataset extracted from Wikipedia with 56,363 records).
 The model achieved an 8.47 ROUGE-2 score.
 
-[![Wiki Summarization](assets/screenshot.png)](https://youtu.be/#)
+[![Wiki Summarization](assets/screenshot.png)](https://youtu.be/sBEIcP9Eipo)
 
 ## Dataset information
 The dataset extracted from Persian Wikipedia into the form of articles and summaries. I cleaned the dataset into pairs of articles and highlights and reduced the articles' length and highlights' length to a maximum of 512 and 128, respectively, suitable for parsBERT. 
