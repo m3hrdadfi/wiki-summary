@@ -11,9 +11,9 @@ The dataset extracted from Persian Wikipedia into the form of articles and summa
 Also, for making things simple, converted the dataset into the [HuggingFace' datasets](https://github.com/m3hrdadfi/wiki-summary/tree/master/datasets), which is available in the [repo](https://github.com/m3hrdadfi/wiki-summary/tree/master/datasets). 
 Or you can access the `csv` format here:
 
-- [Train Set](https://drive.google.com/uc?id=)
-- [Dev Set](https://drive.google.com/uc?id=)
-- [Test Set](https://drive.google.com/uc?id=)
+- [Train Set](https://drive.google.com/uc?id=1OC6JERii5hyLwUJChzZANcmmXIl9uHvJ)
+- [Dev Set](https://drive.google.com/uc?id=1LaP_Z3OlbBQ8laybXepsmaBW594yxqvc)
+- [Test Set](https://drive.google.com/uc?id=1UrCi8-JBU4fUENC2oCOXD5R932LjgwME)
 
 
 |    #    |  Train |  Dev  |  Test |
