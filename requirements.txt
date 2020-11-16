@@ -1,0 +1,9 @@
+torch==1.7.0
+streamlit==0.71.0
+hazm
+clean-text[gpl]
+emoji
+transformers
+datasets
+plotly
+psutil
