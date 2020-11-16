@@ -1,0 +1,17 @@
+textarea,
+input[inputmode="text"],
+textarea[inputmode="text"],
+.rtl,
+.rtl code {
+    font-family: Vazir !important;
+    text-align: right;
+    direction: rtl !important;
+}
+
+.row-widget.stSelectbox {}
+.row-widget.stSelectbox div {
+    font-family: Vazir !important;
+    text-align: right;
+    direction: rtl !important;
+    padding-right: 5px;
+}

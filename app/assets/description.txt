@@ -1,0 +1,17 @@
+This [paper](https://arxiv.org/abs/1907.12461) introduced the opportunity to use available pre-trained LMs (BERT, GPT-2, and RoBERTa) to achieve state-of-the-art results on some interesting NLP tasks like Text Summaziration.
+So, I trained an EncoderDecoder model based on parsBERT on [WikiSummary](http://github.com/m3hrdadfi/wikisummary) (A summarization dataset extracted from Wikipedia with 56,363 records).
+The model achieved an 8.47 ROUGE-2 score.
+
+<br />
+
+| %       | p    | r    | f    |
+|---------|------|------|------|
+| rouge-2 | 7.12 | 8.47 | 7.10 |
+<small>Table 1: Rouge scores obtained by the Bert2Bert model.</small>
+
+<br />
+
+|    #    |  Train |  Dev  |  Test |
+|:-------:|:------:|:-----:|:-----:|
+| Dataset | 45,653 | 5,073 | 5,637 |
+<small>Table 2: Dataset information</small>
