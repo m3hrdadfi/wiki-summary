@@ -73,7 +73,7 @@ def main(page_title, page_icon, layout='centered', initial_sidebar_state='expand
 
 if __name__ == '__main__':
     main(
-        page_title='WikiSummary',
+        page_title='Wiki Summary',
         page_icon='Φ',
         layout='wide',
         initial_sidebar_state='expanded',
