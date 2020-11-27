@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""TODO: Wiki Summary."""
+"""TODO: Persian Wiki Summary."""
 
 from __future__ import absolute_import, division, print_function
 
@@ -24,9 +24,9 @@ import datasets
 
 # TODO: Add BibTeX citation
 _CITATION = """\
-@misc{Bert2BertFaWikiSummary,
+@misc{Bert2BertWikiSummaryPersian,
   author = {Mehrdad Farahani},
-  title = {Summarization using Bert2Bert model on WikiSummary dataset},
+  title = {Summarization using Bert2Bert model on Persian Wikipedia Summary dataset},
   year = {2020},
   publisher = {GitHub},
   journal = {GitHub repository},
@@ -36,21 +36,24 @@ _CITATION = """\
 
 # TODO: Add description of the dataset here
 _DESCRIPTION = """\
-Wiki Summary
+Persian Wikipedia Summary
 The dataset extracted from Persian Wikipedia into the form of articles and summaries. The dataset cleaned into pairs of articles and highlights and reduced the articles' length and highlights' length to a maximum of 512 and 128, respectively.
-Dataset Information
-===================
-Train	45,653	
-Dev	    5,073
-Test    5,637
 """
 
 _DL_URLS = {
     # pylint: disable=line-too-long
-    "wiki_summary": "https://drive.google.com/uc?id=19EVNUHzmzjDliShr6Pd1BnNx2k6_SVyg",
-    "val_urls": "https://drive.google.com/uc?id=1NRqzz5y2EsdE6C702ShwX2Q4J1T5tyT3",
-    "test_urls": "https://drive.google.com/uc?id=1RSqSKelNzHMjibmwQSR-yIN0yDbtk701",
-    "train_urls": "https://drive.google.com/uc?id=1RospSAaplQ2axkaD1eUsrTfJs2N-HXqq",
+    "1.0.0": {
+        'wiki_summary_persian': 'https://drive.google.com/uc?id=1-GdxaVpl20YIUEWn79Ojg3_Rfl1efUS2',
+        'val_urls': 'https://drive.google.com/uc?id=12GGudar5nzn2N0xwLXYYwDc-a4PXIyto',
+        'test_urls': 'https://drive.google.com/uc?id=1-7eHPLhhMXZPu7RKsNU6FJUlZJwxImCU',
+        'train_urls': 'https://drive.google.com/uc?id=1-2rlAzMIqCd9TbGBTtzYV6Mwfh02QO3U',
+    },
+    "2.0.0": {
+        'wiki_summary_persian': 'https://drive.google.com/uc?id=1-Dbq80_aTGIAmyN2TwTHq88QBPTxlcZf',
+        'val_urls': 'https://drive.google.com/uc?id=1NhlM9ZYS5QMgNyG8ECWFWMzlxFX8smM7',
+        'test_urls': 'https://drive.google.com/uc?id=1-9qqgxfmNJSfKoUbNvfizyqj22eoMi9-',
+        'train_urls': 'https://drive.google.com/uc?id=1-90llw45RTWPGaRCWEFzGJdDAoJT98-8',
+    }
     # pylint: enable=line-too-long
 }
 
@@ -59,21 +62,25 @@ _HIGHLIGHTS = "highlights"
 _ARTICLE = "article"
 
 _SUPPORTED_VERSIONS = [
+    datasets.Version("2.0.0", "Updated extraction version without cutting the article just the highlights"),
     datasets.Version("1.0.0", "First version of article and highlights from Wikipedia"),
 ]
+_DEFAULT_VERSION = datasets.Version(
+    "2.0.0",
+    "Updated extraction version without cutting the article just the highlights")
 
 
-class WikiSummaryConfig(datasets.BuilderConfig):
-    """BuilderConfig for WikiSummary"""
+class WikiSummaryPersianConfig(datasets.BuilderConfig):
+    """BuilderConfig for WikiSummaryPersian"""
 
     def __init__(self, **kwargs):
         """
-        BuilderConfig for WikiSummary
+        BuilderConfig for WikiSummaryPersian
 
         Args:
             **kwargs: keyword argument forwarded to super.
         """
-        super(WikiSummaryConfig, self).__init__(**kwargs)
+        super(WikiSummaryPersianConfig, self).__init__(**kwargs)
 
 
 def _get_url_hashes(path):
@@ -100,8 +107,8 @@ def _get_hash_from_path(p):
 
 def _find_files(dl_paths, publisher, url_dict):
     """Find files corresponding to urls."""
-    if publisher == "wiki_summary":
-        top_dir = os.path.join(dl_paths["wiki_summary"], "wiki_summary", "stories")
+    if publisher == "wiki_summary_persian":
+        top_dir = os.path.join(dl_paths["wiki_summary_persian"], "wiki_summary_persian", "stories")
     else:
         logging.fatal("Unsupported publisher: %s", publisher)
     files = sorted(os.listdir(top_dir))
@@ -125,7 +132,7 @@ def _subset_filenames(dl_paths, split):
         urls = _get_url_hashes(dl_paths["test_urls"])
     else:
         logging.fatal("Unsupported split: %s", split)
-    files = _find_files(dl_paths, "wiki_summary", urls)
+    files = _find_files(dl_paths, "wiki_summary_persian", urls)
     return files
 
 
@@ -145,12 +152,7 @@ def _read_text_file(text_file):
 
 def _get_art_abs(story_file, tfds_version):
     """Get headline (highlights) and article from a story file path."""
-    # Based on https://github.com/abisee/cnn-dailymail/blob/master/
-    #     make_datafiles.py
-
     lines = _read_text_file(story_file)
-
-    # The github code lowercase the text and we removed it in 3.0.0.
 
     # Put periods on the ends of lines that are missing them
     # (this is a problem in the dataset because many image captions don't end in
@@ -193,11 +195,15 @@ def _get_art_abs(story_file, tfds_version):
     return article, headline
 
 
-class WikiSummary(datasets.GeneratorBasedBuilder):
-    """WikiSummary non-anonymized wiki-summary dataset."""
+class WikiSummaryPersian(datasets.GeneratorBasedBuilder):
+    """WikiSummaryPersian non-anonymized wiki-summary dataset."""
 
     BUILDER_CONFIGS = [
-        WikiSummaryConfig(name=str(version), description="Plain text", version=version)
+        WikiSummaryPersianConfig(
+            name=str(version),
+            description="Persian Wikipedia Summary v{}".format(version),
+            version=version
+        )
         for version in _SUPPORTED_VERSIONS
     ]
 
@@ -222,19 +228,23 @@ class WikiSummary(datasets.GeneratorBasedBuilder):
             yield " ".join([ex[_ARTICLE], ex[_HIGHLIGHTS]])
 
     def _split_generators(self, dl_manager):
-        dl_paths = dl_manager.download_and_extract(_DL_URLS)
+        dl_url = _DL_URLS[self.config.name] if self.config.name in _DL_URLS else _DL_URLS[_DEFAULT_VERSION.name]
+        dl_paths = dl_manager.download_and_extract(dl_url)
         train_files = _subset_filenames(dl_paths, datasets.Split.TRAIN)
         # Generate shared vocabulary
 
         return [
-            datasets.SplitGenerator(name=datasets.Split.TRAIN, gen_kwargs={"files": train_files}),
+            datasets.SplitGenerator(
+                name=datasets.Split.TRAIN,
+                gen_kwargs={"files": train_files}
+            ),
             datasets.SplitGenerator(
                 name=datasets.Split.VALIDATION,
                 gen_kwargs={"files": _subset_filenames(dl_paths, datasets.Split.VALIDATION)},
             ),
             datasets.SplitGenerator(
                 name=datasets.Split.TEST, gen_kwargs={"files": _subset_filenames(dl_paths, datasets.Split.TEST)}
-            ),
+            )
         ]
 
     def _generate_examples(self, files):
